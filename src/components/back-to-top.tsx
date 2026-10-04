@@ -19,7 +19,7 @@ export function BackToTop({ label }: { label: string }) {
     <button
       type="button"
       aria-label={label}
-      className="fixed right-4 bottom-5 z-40 grid size-11 cursor-pointer place-items-center rounded-full bg-accent text-white shadow-[0_8px_24px_rgba(11,124,174,0.28)] hover:bg-accent-deep"
+      className="fixed right-4 bottom-20 z-40 grid size-11 cursor-pointer place-items-center rounded-full bg-accent text-white shadow-[0_8px_24px_rgba(11,124,174,0.28)] hover:bg-accent-deep"
       onClick={() => {
         const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });

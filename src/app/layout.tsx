@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Open_Sans, Poppins } from "next/font/google";
+import { Assistant } from "@/components/assistant";
 import { BackToTop } from "@/components/back-to-top";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -77,6 +78,7 @@ export default async function RootLayout({
         </main>
         <Footer />
         <BackToTop label={dict.chrome.backToTop} />
+        <Assistant locale={dict.locale} copy={dict.assistant} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

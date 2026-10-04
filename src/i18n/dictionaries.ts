@@ -35,6 +35,19 @@ const dictionaries = {
       social: "Réseaux sociaux",
       backToTop: "Retour en haut",
     },
+    assistant: {
+      open: "Assistant",
+      close: "Fermer l’assistant",
+      title: "Assistant Fresco Transit",
+      lead: "Questions sur le fret, la douane, le suivi ou le contact.",
+      placeholder: "Votre question",
+      send: "Envoyer",
+      greeting:
+        "Bonjour. Je peux vous orienter sur les prestations, le siège et la page de suivi.",
+      note: "Une réponse oriente. Elle ne vaut pas devis.",
+      error: "La réponse n’a pas abouti. Appelez le +225 27 21 72 68 73 ou écrivez à infos@frescotransit.com.",
+      pending: "Réponse en cours",
+    },
     nav: {
       home: "Accueil",
       services: "Services",
@@ -287,6 +300,7 @@ const dictionaries = {
             paragraphs: [
               "Le site ne crée pas de compte. Le formulaire de contact ouvre un e-mail vers {email}. Les champs remplis ne sont reçus que si vous envoyez ce message.",
               "La recherche de suivi envoie la référence saisie afin d’afficher le dossier correspondant. Elle ne crée pas de compte.",
+              "L’assistant du site envoie le texte de la question à un service d’intelligence artificielle pour rédiger une réponse. Fresco Transit ne conserve pas cet échange. N’y indiquez pas de données sensibles.",
             ],
           },
           {
@@ -404,6 +418,18 @@ const dictionaries = {
       language: "Language",
       social: "Social media",
       backToTop: "Back to top",
+    },
+    assistant: {
+      open: "Assistant",
+      close: "Close the assistant",
+      title: "Fresco Transit assistant",
+      lead: "Questions on freight, customs, tracking or contact.",
+      placeholder: "Your question",
+      send: "Send",
+      greeting: "Hello. I can point you to the services, the office and the tracking page.",
+      note: "A reply is guidance. It is not a quote.",
+      error: "The reply did not come through. Call +225 27 21 72 68 73 or write to infos@frescotransit.com.",
+      pending: "Reply in progress",
     },
     nav: {
       home: "Home",
@@ -653,6 +679,7 @@ const dictionaries = {
             paragraphs: [
               "The site does not create an account. The contact form opens an email to {email}. The fields are received only if you send that message.",
               "A tracking search sends the reference you type so the matching file can be shown. It does not create an account.",
+              "The site assistant sends the text of a question to an artificial intelligence service in order to draft a reply. Fresco Transit does not keep that exchange. Do not include sensitive data.",
             ],
           },
           {
