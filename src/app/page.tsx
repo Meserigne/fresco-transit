@@ -1,69 +1,146 @@
+import { Files, Handshake, Path } from "@phosphor-icons/react/ssr";
+import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { ButtonLink } from "@/components/button-link";
+import { QuickPanel } from "@/components/quick-panel";
+import { getDictionary } from "@/i18n/get-dictionary";
+import { company, container, cta, serviceVisuals, services } from "@/lib/site";
 
-export default function Home() {
+const stepMeta = [
+  { icon: Handshake, href: "/contact" as const },
+  { icon: Files, href: "/services" as const },
+  { icon: Path, href: "/a-propos" as const },
+];
+
+export async function generateMetadata(): Promise<Metadata> {
+  const dict = await getDictionary();
+  return { title: { absolute: dict.meta.defaultTitle }, description: dict.meta.defaultDescription };
+}
+
+export default async function HomePage() {
+  const dict = await getDictionary();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <section className="relative bg-[#0b3a52]">
+        <div className="relative min-h-[560px] lg:min-h-[640px]">
+          <Image
+            src="/images/port.jpg"
+            alt={dict.home.heroAlt}
+            fill
+            priority
+            loading="eager"
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#062433]/85 via-[#062433]/55 to-[#062433]/20" />
+          <div className={`${container} relative z-10 pb-36 pt-14 lg:pt-20`}>
+            <h1 className="max-w-[14ch] text-4xl leading-[1.12] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              {dict.home.title}
+            </h1>
+            <p className="mt-5 max-w-[42ch] text-base leading-relaxed text-white">{dict.home.lead}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <ButtonLink href={cta.href} variant="onPhoto">
+                {dict.nav.contact}
+              </ButtonLink>
+              <ButtonLink href="/services" variant="onPhotoGhost">
+                {dict.nav.services}
+              </ButtonLink>
+            </div>
+          </div>
+        </div>
+        <div className={`${container} relative z-20 -mt-24 pb-6`}>
+          <QuickPanel copy={dict.trackingForm} />
+        </div>
+      </section>
+
+      <section className="bg-white py-16 sm:py-20">
+        <div className={`${container} grid gap-4 md:grid-cols-3`}>
+          {dict.home.steps.map((step, index) => {
+            const meta = stepMeta[index];
+            const Icon = meta.icon;
+            return (
+              <article key={step.title} className="flex flex-col rounded-2xl border border-line bg-white p-6">
+                <span className="grid size-11 place-items-center rounded-[8px] bg-accent-soft text-accent">
+                  <Icon size={22} weight="regular" aria-hidden />
+                </span>
+                <h2 className="mt-5 text-xl text-ink">{step.title}</h2>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{step.text}</p>
+                <div className="mt-6">
+                  <ButtonLink href={meta.href}>{step.action}</ButtonLink>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="bg-surface py-16 sm:py-20">
+        <div className={container}>
+          <h2 className="mx-auto max-w-[18ch] text-center text-3xl leading-[1.15] tracking-tight text-ink sm:text-4xl">
+            {dict.home.servicesTitle}
+          </h2>
+          <p className="mx-auto mt-4 max-w-[58ch] text-center text-base leading-relaxed text-muted">
+            {dict.home.servicesLead}
           </p>
+          <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
+            {services.map((service) => {
+              const visual = serviceVisuals[service.id];
+              const copy = dict.services.items[service.id];
+              return (
+                <Link
+                  key={service.id}
+                  href={`/services#${service.id}`}
+                  className="w-[260px] shrink-0 snap-start cursor-pointer"
+                >
+                  <div className="relative h-40 overflow-hidden rounded-2xl bg-line">
+                    <Image
+                      src={visual.src}
+                      alt={dict.images[service.id]}
+                      fill
+                      sizes="260px"
+                      className="object-cover"
+                      style={{ objectPosition: visual.position ?? "center" }}
+                    />
+                  </div>
+                  <h3 className="mt-4 text-base text-ink">{copy.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted">{copy.summary}</p>
+                </Link>
+              );
+            })}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+      </section>
+
+      <section className="bg-white py-16 sm:py-20">
+        <div className={container}>
+          <h2 className="mx-auto max-w-[16ch] text-center text-3xl leading-[1.15] tracking-tight text-ink sm:text-4xl">
+            {dict.home.worldTitle}
+          </h2>
+          <p className="mx-auto mt-4 max-w-[62ch] text-center text-base leading-relaxed text-muted">
+            {dict.home.worldLead}{" "}
+            {`${company.tradeName} (${company.initials}) ${dict.home.tradeLine} ${company.legalName}.`}
+          </p>
+          <div className="relative mx-auto mt-10 aspect-[16/8] max-w-5xl overflow-hidden rounded-2xl bg-line">
             <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+              src="/images/warehouse.jpg"
+              alt={dict.home.worldAlt}
+              fill
+              sizes="(min-width: 1024px) 1024px, 100vw"
+              className="object-cover"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+          <ul className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {dict.home.values.map(([title, text]) => (
+              <li key={title}>
+                <h3 className="text-base text-accent">{title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted">{text}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }
