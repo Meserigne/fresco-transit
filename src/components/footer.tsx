@@ -19,7 +19,7 @@ export async function Footer() {
         <div>
           <Link href="/" className="inline-flex">
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt={company.name}
               width={458}
               height={393}
