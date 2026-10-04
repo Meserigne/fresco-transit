@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
 import { QuickPanel } from "@/components/quick-panel";
 import { getDictionary } from "@/i18n/get-dictionary";
-import { company, container, cta, serviceVisuals, services } from "@/lib/site";
+import { container, cta, serviceVisuals, services } from "@/lib/site";
 
 const stepMeta = [
   { icon: Handshake, href: "/contact" as const },
@@ -119,8 +119,7 @@ export default async function HomePage() {
             {dict.home.worldTitle}
           </h2>
           <p className="mx-auto mt-4 max-w-[62ch] text-center text-base leading-relaxed text-muted">
-            {dict.home.worldLead}{" "}
-            {`${company.tradeName} (${company.initials}) ${dict.home.tradeLine} ${company.legalName}.`}
+            {dict.home.worldLead}
           </p>
           <div className="relative mx-auto mt-10 aspect-[16/8] max-w-5xl overflow-hidden rounded-2xl bg-line">
             <Image

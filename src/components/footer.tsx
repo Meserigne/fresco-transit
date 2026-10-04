@@ -26,11 +26,6 @@ export async function Footer() {
               className="h-24 w-auto"
             />
           </Link>
-          <p className="mt-3 text-sm leading-relaxed text-muted">
-            {company.legalName}
-            <br />
-            {company.tradeName} ({company.initials})
-          </p>
         </div>
         <div>
           <p className="text-sm font-semibold text-ink">{dict.chrome.office}</p>

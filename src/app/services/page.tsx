@@ -21,7 +21,7 @@ export default async function ServicesPage() {
             {dict.services.introTitle}
           </h1>
           <p className="mt-5 max-w-[65ch] text-base leading-relaxed text-muted">
-            {company.tradeName} {dict.services.intro}
+            {dict.services.intro}
           </p>
         </div>
       </header>

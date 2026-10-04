@@ -15,12 +15,7 @@ export default async function AboutPage() {
   const identity = [
     {
       title: copy.company,
-      lines: [
-        `${copy.trade} : ${company.tradeName} (${company.initials})`,
-        `${copy.legal} : ${company.legalName}`,
-        copy.form,
-        `${copy.manager} : ${company.manager}`,
-      ],
+      lines: [`${copy.manager} : ${company.manager}`],
     },
     {
       title: copy.office,
@@ -36,7 +31,7 @@ export default async function AboutPage() {
             {copy.title}
           </h1>
           <p className="mt-5 max-w-[65ch] text-base leading-relaxed text-muted">
-            {copy.lead} {company.tradeName} {copy.leadEnd}
+            {copy.lead}
           </p>
         </div>
       </header>

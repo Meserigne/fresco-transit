@@ -5,7 +5,7 @@ const dictionaries = {
     meta: {
       defaultTitle: "Fresco Transit | Transit, import et export à Abidjan",
       defaultDescription:
-        "Fresco Transit (Import-Export-Fresco) assure le fret maritime et aérien, la douane, le groupage et la livraison depuis Abidjan, 24h/24.",
+        "Fresco Transit assure le fret maritime et aérien, la douane, le groupage et la livraison depuis Abidjan, 24h/24.",
       contactTitle: "Nous contacter",
       contactDescription:
         "Contactez Fresco Transit à Treichville : téléphone, e-mail et formulaire. Équipe disponible 24h/24.",
@@ -14,7 +14,7 @@ const dictionaries = {
         "Fret maritime, fret aérien, groupage, dégroupage, douane, transport et assistance. Les prestations de Fresco Transit à Abidjan.",
       aboutTitle: "À propos",
       aboutDescription:
-        "Fresco Transit SARL Unipersonnelle, enseigne Import-Export-Fresco, société de transit basée à Treichville, Abidjan.",
+        "Fresco Transit, société de transit basée à Treichville, Abidjan.",
       trackingTitle: "Suivi de dossier",
       trackingDescription:
         "Suivez un dossier Fresco Transit avec la référence, le connaissement ou le numéro de conteneur.",
@@ -60,7 +60,6 @@ const dictionaries = {
       worldLead:
         "Le siège est à Treichville. Les opérations s’étendent au-delà de la Côte d’Ivoire, avec des partenaires et des clients dans d’autres pays.",
       worldAlt: "Allées d’un entrepôt et rayonnages de marchandises.",
-      tradeLine: "est l’enseigne de",
       steps: [
         {
           title: "Accueillir",
@@ -131,7 +130,7 @@ const dictionaries = {
     services: {
       introTitle: "Ce que nous prenons en charge",
       intro:
-        "couvre le transit, la consignation, la manutention, l’emmagasinage, le fret et le transport de marchandises.",
+        "Fresco Transit couvre le transit, la consignation, la manutention, l’emmagasinage, le fret et le transport de marchandises.",
       nav: "Prestations",
       close: "Pour confier un dossier, appelez le",
       closeOr: "ou écrivez à",
@@ -194,17 +193,13 @@ const dictionaries = {
     },
     about: {
       title: "Une équipe à votre disposition",
-      lead: "Spécialisée dans le transit, la manutention, la consignation et le transport, au niveau national comme à l’international,",
-      leadEnd: "met une équipe jeune et expérimentée à la disposition de ses clients, 24h/24.",
+      lead: "Spécialisée dans le transit, la manutention, la consignation et le transport, au niveau national comme à l’international, Fresco Transit met une équipe jeune et expérimentée à la disposition de ses clients, 24h/24.",
       p1: "L’équipe écoute, accueille, traite les dossiers et accompagne les démarches d’importation et d’exportation, avec un souci d’efficacité, de rapidité et de satisfaction.",
       p2: "En Côte d’Ivoire, la société a pour objet l’importation et l’exportation de produits, ainsi que la consignation, la manutention, l’emmagasinage, le fret et le transport de marchandises.",
       p3: "Des partenaires et des clients lui font confiance ici, et dans d’autres pays.",
       identity: "Identité",
       company: "Société",
       office: "Siège",
-      trade: "Enseigne",
-      legal: "Raison sociale",
-      form: "Forme : société à responsabilité limitée unipersonnelle",
       manager: "Gérant",
     },
     contact: {
@@ -244,7 +239,7 @@ const dictionaries = {
           {
             title: "Éditeur",
             paragraphs: [
-              "Le site est édité par {legalName}, enseigne {tradeName} ({initials}), dont le siège est à Treichville, Abidjan, Côte d’Ivoire. Contact : {email}, {phone}.",
+              "Le site est édité par Fresco Transit, dont le siège est à Treichville, Abidjan, Côte d’Ivoire. Contact : {email}, {phone}.",
             ],
           },
           {
@@ -285,7 +280,7 @@ const dictionaries = {
         sections: [
           {
             title: "Responsable",
-            paragraphs: ["{legalName}, siège à Treichville, Abidjan. Contact : {email}, {phone}."],
+            paragraphs: ["Fresco Transit, siège à Treichville, Abidjan. Contact : {email}, {phone}."],
           },
           {
             title: "Données concernées",
@@ -380,7 +375,7 @@ const dictionaries = {
     meta: {
       defaultTitle: "Fresco Transit | Freight forwarding in Abidjan",
       defaultDescription:
-        "Fresco Transit (Import-Export-Fresco) handles sea and air freight, customs, groupage and delivery from Abidjan, around the clock.",
+        "Fresco Transit handles sea and air freight, customs, groupage and delivery from Abidjan, around the clock.",
       contactTitle: "Contact us",
       contactDescription:
         "Contact Fresco Transit in Treichville by phone, email or form. The team is available around the clock.",
@@ -389,7 +384,7 @@ const dictionaries = {
         "Sea freight, air freight, groupage, degroupage, customs, transport and support. Fresco Transit services in Abidjan.",
       aboutTitle: "About",
       aboutDescription:
-        "Fresco Transit SARL Unipersonnelle, trading as Import-Export-Fresco, a forwarding company based in Treichville, Abidjan.",
+        "Fresco Transit, a forwarding company based in Treichville, Abidjan.",
       trackingTitle: "Shipment tracking",
       trackingDescription:
         "Track a Fresco Transit file with the reference, bill of lading or container number.",
@@ -435,7 +430,6 @@ const dictionaries = {
       worldLead:
         "The office is in Treichville. Operations reach beyond Côte d’Ivoire, with partners and clients in other countries.",
       worldAlt: "Warehouse aisles and racks of goods.",
-      tradeLine: "is the trade name of",
       steps: [
         {
           title: "Listen",
@@ -506,7 +500,7 @@ const dictionaries = {
     services: {
       introTitle: "What we handle",
       intro:
-        "covers forwarding, ship agency, handling, warehousing, freight and the transport of goods.",
+        "Fresco Transit covers forwarding, ship agency, handling, warehousing, freight and the transport of goods.",
       nav: "Services",
       close: "To hand over a file, call",
       closeOr: "or write to",
@@ -567,17 +561,13 @@ const dictionaries = {
     },
     about: {
       title: "A team at your disposal",
-      lead: "Specialised in forwarding, handling, ship agency and transport, in Côte d’Ivoire and abroad,",
-      leadEnd: "puts a young and experienced team at its clients’ disposal, around the clock.",
+      lead: "Specialised in forwarding, handling, ship agency and transport, in Côte d’Ivoire and abroad, Fresco Transit puts a young and experienced team at its clients’ disposal, around the clock.",
       p1: "The team listens, welcomes, handles files and stays with import and export steps, with care for efficiency, speed and satisfaction.",
       p2: "In Côte d’Ivoire, the company’s purpose is the import and export of goods, together with ship agency, handling, warehousing, freight and the transport of cargo.",
       p3: "Partners and clients trust the company here, and in other countries.",
       identity: "Identity",
       company: "Company",
       office: "Office",
-      trade: "Trade name",
-      legal: "Legal name",
-      form: "Form: single-member limited liability company",
       manager: "Manager",
     },
     contact: {
@@ -617,7 +607,7 @@ const dictionaries = {
           {
             title: "Publisher",
             paragraphs: [
-              "The site is published by {legalName}, trading as {tradeName} ({initials}), with its office in Treichville, Abidjan, Côte d’Ivoire. Contact: {email}, {phone}.",
+              "The site is published by Fresco Transit, with its office in Treichville, Abidjan, Côte d’Ivoire. Contact: {email}, {phone}.",
             ],
           },
           {
@@ -656,7 +646,7 @@ const dictionaries = {
         sections: [
           {
             title: "Controller",
-            paragraphs: ["{legalName}, office in Treichville, Abidjan. Contact: {email}, {phone}."],
+            paragraphs: ["Fresco Transit, office in Treichville, Abidjan. Contact: {email}, {phone}."],
           },
           {
             title: "Data involved",

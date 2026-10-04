@@ -1,6 +1,6 @@
 # Fresco Transit
 
-Site vitrine de Fresco Transit SARL Unipersonnelle (Import-Export-Fresco), transit, fret et logistique à Abidjan.
+Site vitrine de Fresco Transit, transit, fret et logistique à Abidjan.
 
 ```bash
 npm install

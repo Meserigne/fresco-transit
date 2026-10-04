@@ -1,8 +1,5 @@
 export const company = {
   name: "Fresco Transit",
-  legalName: "Fresco Transit SARL Unipersonnelle",
-  tradeName: "Import-Export-Fresco",
-  initials: "I.E.F",
   phoneDisplay: "+225 27 21 72 68 73",
   phoneTel: "+2252721726873",
   email: "infos@frescotransit.com",

@@ -37,7 +37,6 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: company.name,
-  legalName: company.legalName,
   email: company.email,
   telephone: company.phoneTel,
   sameAs: socials.map((item) => item.href),
