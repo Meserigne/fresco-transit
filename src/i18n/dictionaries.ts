@@ -210,10 +210,7 @@ const dictionaries = {
       p1: "L’équipe écoute, accueille, traite les dossiers et accompagne les démarches d’importation et d’exportation, avec un souci d’efficacité, de rapidité et de satisfaction.",
       p2: "En Côte d’Ivoire, la société a pour objet l’importation et l’exportation de produits, ainsi que la consignation, la manutention, l’emmagasinage, le fret et le transport de marchandises.",
       p3: "Des partenaires et des clients lui font confiance ici, et dans d’autres pays.",
-      identity: "Identité",
-      company: "Société",
       office: "Siège",
-      manager: "Gérant",
     },
     contact: {
       title: "Nous contacter",
@@ -591,10 +588,7 @@ const dictionaries = {
       p1: "The team listens, welcomes, handles files and stays with import and export steps, with care for efficiency, speed and satisfaction.",
       p2: "In Côte d’Ivoire, the company’s purpose is the import and export of goods, together with ship agency, handling, warehousing, freight and the transport of cargo.",
       p3: "Partners and clients trust the company here, and in other countries.",
-      identity: "Identity",
-      company: "Company",
       office: "Office",
-      manager: "Manager",
     },
     contact: {
       title: "Contact us",

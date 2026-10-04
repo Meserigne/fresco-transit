@@ -12,16 +12,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AboutPage() {
   const dict = await getDictionary();
   const copy = dict.about;
-  const identity = [
-    {
-      title: copy.company,
-      lines: [`${copy.manager} : ${company.manager}`],
-    },
-    {
-      title: copy.office,
-      lines: [...company.addressLines],
-    },
-  ];
 
   return (
     <>
@@ -57,19 +47,12 @@ export default async function AboutPage() {
 
       <section className="border-t border-line bg-surface py-14 lg:py-16">
         <div className={container}>
-          <h2 className="text-3xl tracking-tight text-ink">{copy.identity}</h2>
-          <div className="mt-8 grid gap-8 md:grid-cols-2">
-            {identity.map((block) => (
-              <section key={block.title}>
-                <h3 className="text-lg text-ink">{block.title}</h3>
-                <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted">
-                  {block.lines.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              </section>
+          <h2 className="text-3xl tracking-tight text-ink">{copy.office}</h2>
+          <ul className="mt-6 max-w-md space-y-2 text-sm leading-relaxed text-muted">
+            {company.addressLines.map((line) => (
+              <li key={line}>{line}</li>
             ))}
-          </div>
+          </ul>
           <div className="mt-10">
             <ButtonLink href={cta.href}>{dict.nav.contact}</ButtonLink>
           </div>

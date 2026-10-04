@@ -10,7 +10,6 @@ export const company = {
     "03 BPM 396 Abidjan 03",
     "Côte d’Ivoire",
   ],
-  manager: "Damalan Assorno Pierre",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Immeuble%20Balance%20boulevard%20Giscard%20d%27Estaing%20Treichville%20Abidjan",
 } as const;

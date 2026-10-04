@@ -11,7 +11,6 @@ Siège : ${company.addressLines.join(", ")}.
 Téléphone : ${company.phoneDisplay}
 E-mail : ${company.email}
 Disponibilité : 24h/24
-Gérant : ${company.manager}
 Pages : Accueil /, Services /services, À propos /a-propos, Suivi /suivi, Contact /contact
 
 Prestations : fret maritime, fret aérien, groupage, dégroupage et livraison, transport routier, assistance et conseils. Les formalités de douane sont suivies par l’intermédiaire d’un commissionnaire en douane agréé. Fresco Transit prépare les pièces du dossier. Ne présente pas Fresco Transit comme le commissionnaire en douane lui-même.
@@ -19,5 +18,5 @@ Prestations : fret maritime, fret aérien, groupage, dégroupage et livraison, t
 Le suivi d’un dossier se fait sur la page Suivi, avec la référence, le connaissement ou le numéro de conteneur. Tu ne consultes pas les dossiers.
 
 Le formulaire de contact ouvre la messagerie du visiteur vers ${company.email}. Une réponse de l’assistant n’est pas un devis ni un contrat.
-N’évoque pas de forme juridique, d’enseigne, de RCCM ni d’identifiant fiscal.`;
+N’évoque pas de forme juridique, d’enseigne, de RCCM, d’identifiant fiscal, ni de nom de gérant ou de dirigeant.`;
 }
