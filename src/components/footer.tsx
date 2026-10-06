@@ -2,7 +2,7 @@ import { FacebookLogo, InstagramLogo, TiktokLogo } from "@phosphor-icons/react/s
 import Image from "next/image";
 import Link from "next/link";
 import { getDictionary } from "@/i18n/get-dictionary";
-import { company, container, cta, legalNav, nav, socials } from "@/lib/site";
+import { company, container, cta, legalNav, loginHref, nav, socials } from "@/lib/site";
 
 const socialIcons = {
   facebook: FacebookLogo,
@@ -83,6 +83,9 @@ export async function Footer() {
           <Link href={cta.href} className="hover:text-accent">
             {dict.nav.contact}
           </Link>
+          <a href={loginHref} className="hover:text-accent">
+            {dict.chrome.login}
+          </a>
         </nav>
       </div>
       <div className={`${container} border-t border-line py-5`}>

@@ -8,7 +8,7 @@ import { useState } from "react";
 import { LanguageSwitch } from "@/components/language-switch";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/locale";
-import { company, cta, nav } from "@/lib/site";
+import { company, cta, loginHref, nav } from "@/lib/site";
 
 export function Header({
   locale,
@@ -30,6 +30,9 @@ export function Header({
     <div>
       <div className="border-b border-line bg-white text-sm text-muted">
         <div className="mx-auto flex h-9 w-full max-w-7xl items-center justify-end gap-5 px-4 sm:px-6 lg:px-8">
+          <a href={loginHref} className="hidden font-medium text-ink hover:text-accent lg:inline">
+            {chrome.login}
+          </a>
           <LanguageSwitch locale={locale} label={chrome.language} />
           <a
             href={`tel:${company.phoneTel}`}
@@ -115,6 +118,14 @@ export function Header({
                   </Link>
                 </li>
               ))}
+              <li>
+                <a
+                  href={loginHref}
+                  className="block rounded-[8px] px-3 py-3 text-base font-medium text-ink hover:bg-accent-soft hover:text-accent"
+                >
+                  {chrome.login}
+                </a>
+              </li>
               <li className="pt-2">
                 <Link
                   href={cta.href}
