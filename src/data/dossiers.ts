@@ -8,6 +8,18 @@ export type DossierEvent = {
   note: { fr: string; en: string };
 };
 
+export type PublicInvoice = {
+  number: string;
+  kind: "facture" | "proforma";
+  title: string;
+  amount: number;
+  discount: number;
+  paid: number;
+  status: string;
+  issuedOn: string;
+  dueOn: string;
+};
+
 export type Dossier = {
   reference: string;
   bl: string;
@@ -22,6 +34,10 @@ export type Dossier = {
   updatedAt: string;
   sample: boolean;
   events: DossierEvent[];
+  eta?: string;
+  situation?: { fr: string; en: string };
+  invoices?: PublicInvoice[];
+  invoiceOnly?: boolean;
 };
 
 export const dossiers: Dossier[] = [

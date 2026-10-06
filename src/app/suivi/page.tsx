@@ -6,6 +6,8 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import { findDossier } from "@/lib/tracking";
 import { container, cta } from "@/lib/site";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   const dict = await getDictionary();
   return { title: dict.meta.trackingTitle, description: dict.meta.trackingDescription };
@@ -28,7 +30,7 @@ export default async function TrackingPage({
   const copy = dict.trackingPage;
   const params = await searchParams;
   const query = typeof params.ref === "string" ? params.ref.slice(0, 40) : "";
-  const dossier = query ? findDossier(query) : undefined;
+  const dossier = query ? await findDossier(query) : undefined;
 
   return (
     <>
@@ -75,7 +77,7 @@ function DossierView({
   copy: Awaited<ReturnType<typeof getDictionary>>["trackingPage"];
   contact: string;
 }) {
-  const fields = [
+  const fields: Array<[string, string]> = [
     [copy.fields.client, dossier.client],
     [copy.fields.direction, copy.direction[dossier.direction]],
     [copy.fields.mode, copy.mode[dossier.mode]],
@@ -85,9 +87,12 @@ function DossierView({
     [copy.fields.bl, dossier.bl || copy.emptyBl],
     [copy.fields.container, dossier.container || copy.emptyContainer],
     [copy.fields.updated, formatDate(dossier.updatedAt, locale)],
-  ] as const;
+  ];
+  if (dossier.situation) fields.splice(1, 0, [copy.fields.situation, dossier.situation[locale]]);
+  if (dossier.eta) fields.push([copy.fields.eta, formatDate(dossier.eta, locale)]);
 
   return (
+    <>
     <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
       <div>
         <p className="text-sm font-semibold uppercase tracking-wide text-accent">{dossier.reference}</p>
@@ -108,6 +113,9 @@ function DossierView({
           {contact}
         </Link>
       </div>
+      {dossier.invoiceOnly ? (
+        <p className="text-base leading-relaxed text-muted">{copy.invoiceOnly}</p>
+      ) : (
       <ol className="space-y-0" aria-label={copy.timeline}>
         {dossier.events.map((event, index) => {
           const last = index === dossier.events.length - 1;
@@ -135,6 +143,75 @@ function DossierView({
           );
         })}
       </ol>
+      )}
     </div>
+    {dossier.invoices ? <InvoiceList dossier={dossier} locale={locale} copy={copy} /> : null}
+    </>
+  );
+}
+
+function money(value: number) {
+  return `${new Intl.NumberFormat("fr-FR").format(value)} XOF`;
+}
+
+function InvoiceList({
+  dossier,
+  locale,
+  copy,
+}: {
+  dossier: Dossier;
+  locale: "fr" | "en";
+  copy: Awaited<ReturnType<typeof getDictionary>>["trackingPage"];
+}) {
+  const invoices = dossier.invoices ?? [];
+  return (
+    <section className="mt-12 border-t border-line pt-10">
+      <h3 className="text-2xl text-ink">{copy.invoicesTitle}</h3>
+      <p className="mt-2 text-sm text-muted">{copy.invoicesLead}</p>
+      {invoices.length === 0 ? <p className="mt-4 text-base text-muted">{copy.invoicesEmpty}</p> : (
+        <ul className="mt-6 grid gap-4">
+          {invoices.map((invoice) => {
+            const balance = Math.max(0, invoice.amount - invoice.discount - invoice.paid);
+            return (
+              <li key={invoice.number} className="rounded-2xl border border-line p-4">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <p className="text-base font-semibold text-ink">{invoice.number}</p>
+                  <p className="text-sm text-accent">{copy.invoiceKind[invoice.kind]} · {copy.invoiceStatus[invoice.status as keyof typeof copy.invoiceStatus] ?? invoice.status}</p>
+                </div>
+                {invoice.title ? <p className="mt-1 text-sm text-muted">{invoice.title}</p> : null}
+                <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  <div>
+                    <dt className="text-sm text-muted">{copy.amount}</dt>
+                    <dd className="font-semibold text-ink">{money(invoice.amount)}</dd>
+                  </div>
+                  {invoice.discount > 0 ? (
+                    <div>
+                      <dt className="text-sm text-muted">{copy.discount}</dt>
+                      <dd className="font-semibold text-ink">{money(invoice.discount)}</dd>
+                    </div>
+                  ) : null}
+                  <div>
+                    <dt className="text-sm text-muted">{copy.paid}</dt>
+                    <dd className="font-semibold text-ink">{money(invoice.paid)}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-muted">{copy.balance}</dt>
+                    <dd className="font-semibold text-ink">{money(balance)}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-muted">{copy.issued}</dt>
+                    <dd className="font-semibold text-ink">{invoice.issuedOn ? formatDate(invoice.issuedOn, locale) : copy.noDate}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-muted">{copy.due}</dt>
+                    <dd className="font-semibold text-ink">{invoice.dueOn ? formatDate(invoice.dueOn, locale) : copy.noDate}</dd>
+                  </div>
+                </dl>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </section>
   );
 }

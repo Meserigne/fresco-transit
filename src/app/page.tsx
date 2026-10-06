@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
 import { QuickPanel } from "@/components/quick-panel";
 import { getDictionary } from "@/i18n/get-dictionary";
+import { findDossier } from "@/lib/tracking";
 import { container, cta, serviceVisuals, services } from "@/lib/site";
 
 const stepMeta = [
@@ -18,8 +19,15 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: { absolute: dict.meta.defaultTitle }, description: dict.meta.defaultDescription };
 }
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ ref?: string }>;
+}) {
   const dict = await getDictionary();
+  const params = await searchParams;
+  const query = typeof params.ref === "string" ? params.ref.slice(0, 40) : "";
+  const dossier = query ? await findDossier(query) : undefined;
 
   return (
     <>
@@ -51,7 +59,13 @@ export default async function HomePage() {
           </div>
         </div>
         <div className={`${container} relative z-20 -mt-24 pb-6`}>
-          <QuickPanel copy={dict.trackingForm} />
+          <QuickPanel
+            copy={dict.trackingForm}
+            page={dict.trackingPage}
+            locale={dict.locale}
+            query={query}
+            dossier={dossier}
+          />
         </div>
       </section>
 
