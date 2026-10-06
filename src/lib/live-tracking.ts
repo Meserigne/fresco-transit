@@ -19,9 +19,35 @@ function normalize(value: string) {
   return value.trim().toUpperCase().replace(/\s+/g, "");
 }
 
+function managerSuiviUrl() {
+  const configured = process.env.MANAGER_URL?.trim() || process.env.TRACKING_API_URL?.trim();
+  if (configured) {
+    const base = configured.replace(/\/$/, "");
+    return base.endsWith("/api/suivi") ? base : `${base}/api/suivi`;
+  }
+  if (process.env.NODE_ENV === "production") return "https://fresco-transit-manager.onrender.com/api/suivi";
+  return "http://127.0.0.1:4010/api/suivi";
+}
+
+async function findRemoteDossier(query: string): Promise<Dossier | undefined> {
+  const remote = managerSuiviUrl();
+  if (!remote) return undefined;
+  try {
+    const response = await fetch(`${remote}?ref=${encodeURIComponent(query)}`, { cache: "no-store" });
+    if (!response.ok) return undefined;
+    const body = (await response.json()) as { dossier?: Dossier | null };
+    if (!body.dossier || body.dossier.sample) return undefined;
+    return body.dossier;
+  } catch {
+    return undefined;
+  }
+}
+
 export async function findLiveDossier(query: string): Promise<Dossier | undefined> {
   const key = normalize(query);
   if (key.length < 3) return undefined;
+  const remote = await findRemoteDossier(key);
+  if (remote) return remote;
   const file = path.join(process.cwd(), "manager", "data", "transit.db");
   if (!existsSync(file)) return undefined;
   try {

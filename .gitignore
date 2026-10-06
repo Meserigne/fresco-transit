@@ -40,10 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# manager local (ne pas publier la base)
-/manager/node_modules
-/manager/.next
-/manager/data/*.db
-/manager/data/uploads/
-/manager/data/.admin-password
-/manager/data/.session-secret
+# manager local : dépôt privé séparé, jamais sur le site public
+/manager/
