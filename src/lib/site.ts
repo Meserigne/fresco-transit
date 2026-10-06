@@ -24,7 +24,7 @@ export const cta = {
   href: "/contact",
 } as const;
 
-export const loginHref = "/connexion";
+export const loginHref = "/espace/connexion";
 
 export const nav = [
   { href: "/", key: "home" },

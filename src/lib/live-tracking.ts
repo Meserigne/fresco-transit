@@ -25,7 +25,7 @@ function managerSuiviUrl() {
     const base = configured.replace(/\/$/, "");
     return base.endsWith("/api/suivi") ? base : `${base}/api/suivi`;
   }
-  if (process.env.NODE_ENV === "production") return "https://fresco-transit-manager.onrender.com/api/suivi";
+  if (process.env.NODE_ENV === "production") return "https://fresco-transit-manager.onrender.com/espace/api/suivi";
   return "http://127.0.0.1:4010/api/suivi";
 }
 
