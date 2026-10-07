@@ -37,7 +37,8 @@ export function ContactForm({
     message: initialMessage,
   });
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "ready">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [website, setWebsite] = useState("");
 
   function update(key: keyof Fields, value: string) {
     setFields((current) => ({ ...current, [key]: value }));
@@ -59,7 +60,7 @@ export function ContactForm({
     return next;
   }
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const next = validate(fields);
     setErrors(next);
@@ -68,22 +69,36 @@ export function ContactForm({
       return;
     }
 
-    const subject = `${copy.subject} ${fields.name.trim()} ${copy.subjectFor}`;
-    const body = [
-      `Nom: ${fields.name.trim()}`,
-      `Société: ${fields.company.trim() || "-"}`,
-      `E-mail: ${fields.email.trim()}`,
-      `Téléphone: ${fields.phone.trim() || "-"}`,
-      "",
-      fields.message.trim(),
-    ].join("\n");
-
-    window.location.href = `mailto:${company.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus("ready");
+    setStatus("sending");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...fields, website }),
+      });
+      if (!response.ok) {
+        setStatus("error");
+        return;
+      }
+      setFields({ ...empty, message: "" });
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
     <form onSubmit={onSubmit} noValidate className="grid gap-5">
+      <input
+        type="text"
+        name="website"
+        value={website}
+        onChange={(event) => setWebsite(event.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
           id="nom"
@@ -151,13 +166,19 @@ export function ContactForm({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <button
           type="submit"
-          className="inline-flex h-12 cursor-pointer items-center justify-center rounded-[8px] bg-accent px-5 text-sm font-semibold whitespace-nowrap text-white transition-[color,background-color,transform] duration-200 hover:bg-accent-deep active:scale-[0.98]"
+          disabled={status === "sending"}
+          className="inline-flex h-12 cursor-pointer items-center justify-center rounded-[8px] bg-accent px-5 text-sm font-semibold whitespace-nowrap text-white transition-[color,background-color,transform] duration-200 hover:bg-accent-deep active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
         >
-          {copy.submit}
+          {status === "sending" ? copy.sending : copy.submit}
         </button>
-        {status === "ready" ? (
+        {status === "sent" ? (
           <p role="status" className="text-sm text-muted">
-            {copy.ready} {company.email}.
+            {copy.sent}
+          </p>
+        ) : null}
+        {status === "error" ? (
+          <p role="alert" className="text-sm text-danger">
+            {copy.error} {company.email}.
           </p>
         ) : null}
       </div>
